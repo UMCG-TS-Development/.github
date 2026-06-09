@@ -1,44 +1,198 @@
-# Overview 
+# Overview
 
-TS Public Projects exist within three organizations:
-* **UMCG-TS-Development** : While projects are still in development
-* **UMCG-TS-Release** : Projects available for use and still supported
-* **UMCG-TS-Archive** : Previously released projects/versions that are no longer actively supported
+HMS Public Projects are organized across the following GitHub organizations:
 
-## Access
+* **UMCG-TS-Development** – Active repositories, maintained projects, shared tools, libraries, templates, infrastructure, and documentation.
+* **UMCG-TS-Archive** – Historical repositories that are retained for reference but are no longer actively maintained. Repositories in this organization should be considered read-only.
 
-By default, accounts granted access to the organization have no permissions. To access repositories, accounts must either be added to a Team or granted individual access to a single repository. General access to TS Organizations is restricted. When creating a repository as a Member of the organization, the creating account is automatically given direct admin access over the repository. Access to additional members can be given by creating a new Team and assigning the appropriate level of access. 
+## Repository Naming Standards
+
+Repositories should be named according to their primary purpose.
+
+| Prefix   | Purpose                                                     |
+| -------- | ----------------------------------------------------------- |
+| `proj-`  | Project repositories                                        |
+| `tool-`  | Standalone utilities, applications, or scripts              |
+| `lib-`   | Reusable libraries and shared code                          |
+| `tmpl-`  | Template repositories used to create new projects           |
+| `fork-`  | Forks of third-party repositories                           |
+| `infra-` | Infrastructure, automation, and administrative repositories |
+| `docs-`  | Documentation and guidance                                  |
+
+### Examples
+
+```text
+proj-room-booking
+tool-report-generator
+lib-pdf-processing
+tmpl-python-tool
+fork-openemr
+infra-github-management
+docs-development-standards
+```
+
+## Repository Lifecycle
+
+Repositories generally move through the following lifecycle:
+
+### Active
+
+The repository is currently under development.
+
+### Maintenance
+
+The repository is still in use but only receives occasional updates, bug fixes, or maintenance.
+
+### Archived
+
+The repository is no longer actively maintained and is retained for historical reference. Archived repositories should not be modified without authorization.
+
+Repositories that are permanently retired should be transferred to the **UMCG-TS-Archive** organization whenever appropriate.
+
+---
+
+# Access
+
+Organization membership alone does not grant access to repositories.
+
+By default:
+
+* Members have **No Permissions**.
+* Access is granted through **Teams** or **Direct Repository Access**.
+* Organization membership is restricted to approved users.
+
+When a member creates a repository within the organization, GitHub automatically grants that user administrative access to the repository.
+
+## Recommended Access Model
+
+For repositories with multiple contributors, access should be managed through **Teams** rather than individual user assignments.
+
+Benefits include:
+
+* Easier user management
+* Consistent permissions
+* Reduced administrative overhead
+* Improved project visibility
+
 > [!NOTE]
-> If allowing teams access for specific projects, please see the documentation for [Repository Roles](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization) when granting permissions.
+> When assigning permissions to a team, review the GitHub documentation on Repository Roles:
+>
+> https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization
 
-# Adding Existing Repositories 
+---
 
-If you wish to create a version of an existing repository, there are multiple ways to do so dependent on what the owner of the original repository has enabled. 
+# Creating New Repositories
 
-## Download ZIP 
+Before creating a repository, determine its purpose and select the appropriate naming convention.
 
-This means downloading the files directly to your local machine. You can then create a repository using the steps above and place the downloaded files into it. 
+Examples:
 
-## Template 
+| Purpose                 | Repository Name           |
+| ----------------------- | ------------------------- |
+| New application project | `proj-equipment-tracker`  |
+| Shared Python library   | `lib-data-processing`     |
+| Standalone utility      | `tool-file-renamer`       |
+| Documentation           | `docs-training-materials` |
 
-If a repository allows use as a template, it will have a button at the top right of its project main page: “Use this template.” This will open the repository creation page using the selected template as a new project. 
+Avoid creating repositories with generic names such as:
+
+```text
+TestProject
+PythonCode
+NewRepo
+Project1
+```
+
+Repository names should clearly describe their purpose.
+
+---
+
+# Adding Existing Repositories
+
+If you wish to create a version of an existing repository, there are multiple options depending on how the source repository is configured.
+
+## Download ZIP
+
+Download the repository contents directly to your local machine.
+
+A new repository can then be created and populated with the downloaded files.
+
+This method does **not** preserve commit history.
+
+## Template Repository
+
+If a repository has been configured as a template, a **Use this template** button will appear on the repository page.
+
+Selecting this option creates a new repository based on the template.
 
 > [!WARNING]
-> Creating a project from a template will separate it from the parent project completely. It will have no version or commit history. 
+> Repositories created from templates do not inherit commit history from the original repository.
 
-## Fork a Project 
+## Fork a Repository
 
-Creating a fork of a repository preserves the commit data and allows the user to pull updates made from the original repository. This should be exercised with caution if the project will undergo significant changes from its source. 
+Forking creates a copy of an existing repository while preserving commit history.
 
->[!CAUTION]
->Transfer from Another Account/Org: <br>
->If you have permission to transfer a repository, this is an easy option. However, GitHub does not see this as "Creating” a repository and direct access permissions are not generated. To gain access after transferring a repository, it must be granted by an organization admin. 
+Forks can continue to receive updates from the upstream repository.
 
-# Setting Up Permissions 
-To view access and grant permissions, go to the repository's Settings page and select Collaborators and teams. This gives an overview of current access to the project.
+This option is recommended when preserving project history is important.
 
-* **Base Role** : Everyone in the organization has this level of access. Default is No Permissions.
-* **Direct Access** : People and teams granted access through the repository access page.
-* **Organization Access** : People and teams whose access is based on their privileges within the organization. For example, Org_Write teams have write access to all projects within the organization. 
+> [!CAUTION]
+> Forks should be used carefully when the resulting repository is expected to diverge significantly from the original project.
 
-If the project has multiple people that require access, it can be more beneficial to set up a team specifically for the project (or multiple projects). In this instance, create a new team and assign it directly to the approprite repository. 
+## Transfer from Another Account or Organization
+
+Repositories may also be transferred from another GitHub account or organization.
+
+> [!CAUTION]
+> GitHub does not treat a repository transfer as repository creation.
+>
+> Administrative permissions are not automatically reassigned during a transfer.
+>
+> Repository access may need to be granted manually by an Organization Administrator after the transfer is completed.
+
+---
+
+# Managing Permissions
+
+Repository permissions can be viewed and managed from:
+
+**Repository → Settings → Collaborators and Teams**
+
+This page displays all users and teams with access to the repository.
+
+## Permission Sources
+
+### Base Role
+
+The permission level granted to all members of the organization.
+
+Current default:
+
+```text
+No Permissions
+```
+
+### Direct Access
+
+Permissions granted directly to individual users or teams.
+
+### Organization Access
+
+Permissions inherited through organization-level teams or roles.
+
+For example, an organization-wide team may automatically receive access to multiple repositories.
+
+## Team-Based Access
+
+For repositories with multiple contributors, create a dedicated Team and assign permissions to the Team rather than to individual users.
+
+Example:
+
+```text
+Project Team
+├── Alice
+├── Bob
+└── Charlie
+```
+
+The Team is granted repository access once, and membership changes can be managed without modifying repository permissions.
